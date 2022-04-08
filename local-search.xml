@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>JVM 架构原理</title>
+    <link href="/2022/04/07/jvm-abc/"/>
+    <url>/2022/04/07/jvm-abc/</url>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天来讲一下JVM原理，记录下自己对 JVM 的理解和认知。<br>理解 JVM 架构设计和 Java 的工作原理对我们每一个 Java 开发人员来说都是非常重要的一课。想要进一步提升和突破自己技术上的瓶颈，就要加深对 Java 基础掌握。这相当于建房子时要夯实地基。你的房子能稳定盖多高，取决于地基打的有多牢。同样的，你的 Java 之路能走多远，除了业务因素，还取决于对原理的掌握，换言之，要抓到 Java 程序运行的本质。</p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>1995年 James Gosling 给 Sun 公司的 Microsystems 系统设计了 Java 编程语言。由于 Java 语言的一系列特点（跨平台，面向对象，结构化，垃圾回收，强类型和支持并发，反射，范型等等）和 WORA(write once, run anywhare) 设计理念而不断流行至今。<br>为了支持 WORA 的设计理念，Java 语言的编译产物是一份操作平台无关的字节码格式 class 文件。而相应的要运行这份编译产物，Sun 公司（5.0 之后由 Java 社区）制定和维护了一套 Java 虚拟机技术规范。</p><h4 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a><a href="https://zh.wikipedia.org/wiki/%E8%99%9B%E6%93%AC%E6%A9%9F%E5%99%A8">虚拟机</a></h4><p>虚拟机，是指一种特殊的软件，在计算机平台和终端用户之间创建一种环境，终端用户基于虚拟机这个软件所创建的环境来操作运行在上面的其他软件。</p><h4 id="Java-虚拟机"><a href="#Java-虚拟机" class="headerlink" title="Java 虚拟机"></a><a href="https://zh.wikipedia.org/wiki/Java%E8%99%9A%E6%8B%9F%E6%9C%BA">Java 虚拟机</a></h4><p>Java 虚拟机（Java Virtual Machine），是一种能够执行 Java 字节码的虚拟机。</p><p>JVM 是一套规范标准，他的实现可能会因组织或公司而异。比如开源方案 OpenJDK 和 Oracle 的商业化实现。<br>如果精力允许，你我都可以写一套自己的 JVM 程序。</p><p>由于 JVM 是一套遵循 Java 字节码运行规范的虚拟机系统，所以只要编程语言的编译产物为合法的 Java 字节码，就可以在 JVM 上运行。<br>如以下常见原生基于 JVM 的语言：</p><ul><li>Java</li><li>Groovy</li><li>Kotlin</li><li>Scala</li></ul><h2 id="JVM-架构"><a href="#JVM-架构" class="headerlink" title="JVM 架构"></a>JVM 架构</h2><p>有兴趣可以翻翻 <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/">Java 虚拟机技术规范</a>，其中详细描述了 JVM 的设计规范要求。不过不包括实现细节。</p><blockquote><p>Implementation details that are not part of the Java Virtual Machine’s specification would unnecessarily constrain the creativity of implementors. </p></blockquote><img src="/2022/04/07/jvm-abc/jvm_architecture.png" class=""><h3 id="类加载系统"><a href="#类加载系统" class="headerlink" title="类加载系统"></a>类加载系统</h3><p>在 JVM 开始运行后会驻留在内存当中并按 JVM 架构图中所示分配不同的内存空间。执行期间会通过类加载系统将 class 文件加载到内存，称为<strong>动态类加载机制</strong>。在运行期间第一次加载类时，会完成该 class 的加载，链接和初始化过程。</p><h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><ol><li><p>可见性原则</p></li><li><p>唯一性原则</p></li><li><p>委托原则</p></li></ol><h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><ul><li>校验</li><li>准备</li><li>解析</li></ul><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><h3 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h3><h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h4><h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><h3 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h3><h4 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h4><h4 id="运行时编译器"><a href="#运行时编译器" class="headerlink" title="运行时编译器"></a>运行时编译器</h4><h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><h3 id="Java-本地接口（JNI）"><a href="#Java-本地接口（JNI）" class="headerlink" title="Java 本地接口（JNI）"></a>Java 本地接口（JNI）</h3><h3 id="本地方法库"><a href="#本地方法库" class="headerlink" title="本地方法库"></a>本地方法库</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>Programming</category>
+      
+      <category>JVM</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+      <tag>JVM</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第一篇博客</title>
     <link href="/2022/04/06/first-blog/"/>
     <url>/2022/04/06/first-blog/</url>
