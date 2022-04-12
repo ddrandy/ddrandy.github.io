@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/google631aabfdc20d79c3.html</loc>
+    <loc>http://ddrandy.github.io/google631aabfdc20d79c3.html</loc>
     
     <lastmod>2022-04-12</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2022/04/07/jvm-abc/</loc>
+    <loc>http://ddrandy.github.io/2022/04/07/jvm-abc/</loc>
     
     <lastmod>2022-04-08</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/index.html</loc>
+    <loc>http://ddrandy.github.io/categories/index.html</loc>
     
     <lastmod>2022-04-07</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/index.html</loc>
+    <loc>http://ddrandy.github.io/tags/index.html</loc>
     
     <lastmod>2022-04-07</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2022/04/06/first-blog/</loc>
+    <loc>http://ddrandy.github.io/2022/04/06/first-blog/</loc>
     
     <lastmod>2022-04-07</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/about/index.html</loc>
+    <loc>http://ddrandy.github.io/about/index.html</loc>
     
     <lastmod>2022-04-06</lastmod>
     
@@ -57,7 +57,7 @@
   
 
   <url>
-    <loc>http://example.com/</loc>
+    <loc>http://ddrandy.github.io/</loc>
     <lastmod>2022-04-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -65,21 +65,21 @@
 
   
   <url>
-    <loc>http://example.com/tags/hello-world/</loc>
+    <loc>http://ddrandy.github.io/tags/hello-world/</loc>
     <lastmod>2022-04-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/Java/</loc>
+    <loc>http://ddrandy.github.io/tags/Java/</loc>
     <lastmod>2022-04-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/JVM/</loc>
+    <loc>http://ddrandy.github.io/tags/JVM/</loc>
     <lastmod>2022-04-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -88,14 +88,14 @@
 
   
   <url>
-    <loc>http://example.com/categories/Programming/</loc>
+    <loc>http://ddrandy.github.io/categories/Programming/</loc>
     <lastmod>2022-04-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/categories/Programming/JVM/</loc>
+    <loc>http://ddrandy.github.io/categories/Programming/JVM/</loc>
     <lastmod>2022-04-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
