@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ddrandy.github.io/2022/04/20/jvm-vs-dvm/</loc>
+    
+    <lastmod>2022-04-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://ddrandy.github.io/2022/04/07/jvm-abc/</loc>
     
-    <lastmod>2022-04-14</lastmod>
+    <lastmod>2022-04-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,7 +58,7 @@
 
   <url>
     <loc>http://ddrandy.github.io/</loc>
-    <lastmod>2022-04-14</lastmod>
+    <lastmod>2022-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -57,21 +66,35 @@
   
   <url>
     <loc>http://ddrandy.github.io/tags/hello-world/</loc>
-    <lastmod>2022-04-14</lastmod>
+    <lastmod>2022-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://ddrandy.github.io/tags/Java/</loc>
-    <lastmod>2022-04-14</lastmod>
+    <lastmod>2022-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://ddrandy.github.io/tags/JVM/</loc>
-    <lastmod>2022-04-14</lastmod>
+    <lastmod>2022-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ddrandy.github.io/tags/Android/</loc>
+    <lastmod>2022-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ddrandy.github.io/tags/Dalvik/</loc>
+    <lastmod>2022-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -80,14 +103,21 @@
   
   <url>
     <loc>http://ddrandy.github.io/categories/Programming/</loc>
-    <lastmod>2022-04-14</lastmod>
+    <lastmod>2022-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://ddrandy.github.io/categories/Programming/JVM/</loc>
-    <lastmod>2022-04-14</lastmod>
+    <lastmod>2022-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ddrandy.github.io/categories/Programming/Android/</loc>
+    <lastmod>2022-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

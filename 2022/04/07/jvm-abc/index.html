@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://ddrandy.github.io/img/index/jvm-abc-cover.jpg">
 <meta property="article:published_time" content="2022-04-07T11:43:17.000Z">
-<meta property="article:modified_time" content="2022-04-14T07:44:44.399Z">
+<meta property="article:modified_time" content="2022-04-21T06:02:37.438Z">
 <meta property="article:author" content="Randy Dong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JVM">
@@ -200,7 +200,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.4k 字
+      6.4k 字
     </span>
   
 
@@ -209,7 +209,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      45 分钟
+      54 分钟
     </span>
   
 
@@ -353,7 +353,19 @@ test c:java.lang.Object@4f6b3a3f
 </ul>
 <h4 id="程序计数器（线程私有）"><a href="#程序计数器（线程私有）" class="headerlink" title="程序计数器（线程私有）"></a>程序计数器（线程私有）</h4><p>对于每个 JVM 线程，当线程启动时，会创建一个单独的 PC(程序计数器)寄存器。它用来保存当前执行指令的地址（方法区中的内存地址）。如果当前方法是本地方法，则 PC 未定义。一旦方法执行结束，PC 寄存器会更新为下一条指令的地址。</p>
 <h4 id="本地方法栈（线程私有）"><a href="#本地方法栈（线程私有）" class="headerlink" title="本地方法栈（线程私有）"></a>本地方法栈（线程私有）</h4><p>Java 线程和操作系统线程之间存在直接对应关系。在准备好 Java 线程的所有状态后，会创建一个单独的本地栈空间。它用来存储 JNI 调用的本地方法信息（通常由 C&#x2F;C++ 实现）。当本地线程完成创建和初始化，它就会调用 Java 线程中的 <code>run()</code> 方法。当 <code>run()</code> 方法返回时，会处理未捕获的异常，然后本地线程确认是否需要终止 JVM （当前线程是否是最后一个非守护线程）。当线程终止时，本地线程和 Java 线程的所有资源及都将被释放。<br>Java 线程终止后本地线程也会被回收。操作系统负责调度所有线程并进行 CPU 的分派工作。</p>
-<h3 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h3><h4 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h4><h4 id="运行时编译器"><a href="#运行时编译器" class="headerlink" title="运行时编译器"></a>运行时编译器</h4><h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><h3 id="Java-本地接口（JNI）"><a href="#Java-本地接口（JNI）" class="headerlink" title="Java 本地接口（JNI）"></a>Java 本地接口（JNI）</h3><h3 id="本地方法库"><a href="#本地方法库" class="headerlink" title="本地方法库"></a>本地方法库</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<h3 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h3><p>执行引擎用来运行<code>.class</code>（字节码）。它逐行读取字节码，读写各个内存区域中的数据并执行 JVM 指令集。它可以分为下面几个部分：</p>
+<h4 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h4><p>逐行解释字节码，然后执行。存在一个问题是执行解释结果的速度很慢，且当一个方法被多次调用时，每次都需要解释。</p>
+<h4 id="即时（JIT）编译器"><a href="#即时（JIT）编译器" class="headerlink" title="即时（JIT）编译器"></a>即时（JIT）编译器</h4><p>用来提高解释器的执行效率。它将整个字节码编译为本地代码（机器码）。因此当解释器需要处理重复的方法调用时，JIT 会提供该部分直接的机器码，因此不需要重新解释，从而提高效率。执行本地代码比执行一条条解释指令要快很多。<br>它的问题是 JIT 编译时间比解释器解释时间要长。对于只执行一次的代码段，最好的选择可能是解释执行而不是编译执行。本地代码也存储在内存缓存当中，对资源的占用也是一项成本。因此，JIT 编译器会内部检查没个方法调用的频率，并在方法调用超过一定次数时才编译该方法。</p>
+<h5 id="JVM-的编译器优化"><a href="#JVM-的编译器优化" class="headerlink" title="JVM 的编译器优化"></a>JVM 的编译器优化</h5><p>对 JVM 性能优化，下面四个组件可以用来提高性能</p>
+<ul>
+<li>Intermediate Code Genertor 生成中间代码</li>
+<li>Code Optimizer 负责优化上面生成的中间代码</li>
+<li>Target Code Generator 负责生成本地代码（机器码）。</li>
+<li>Profiler 组件用于查找性能瓶颈，aka hotspots。比如方法被多次调用的对象实例。<h6 id="Oracle-Hotspot-VMs-热点虚拟机"><a href="#Oracle-Hotspot-VMs-热点虚拟机" class="headerlink" title="Oracle Hotspot VMs 热点虚拟机"></a>Oracle Hotspot VMs 热点虚拟机</h6>Oracle 有一个包含 Hotspot Compiler 的 JVM 实现。它可以分析识别出最需要 JIT 编译的热点，然后将代码的性能平静部分编译为本地代码。随着后续程序不断执行，如果有编译方法不再被频繁调用，它会将该方法识别为非热点方法，并从缓存中删除本地代码，开始以解释器模式运行。这种方式提高了性能的同时，也避免了对很少使用的代码进行不必要的编译。热点编译器也会使用内联等技术优化编译后的代码。编译器的运行时分析帮助它确定最大性能收益的优化方案。<br>Oracle 的 Java 热点技术特点有快速的内存分配，高效 GC 和服务器多处理器下易扩展多线程处理能力。<h6 id="IBM-AOT-Compiling-提前编译"><a href="#IBM-AOT-Compiling-提前编译" class="headerlink" title="IBM AOT Compiling 提前编译"></a>IBM AOT Compiling 提前编译</h6>特点是 JVM 共享通过共享缓存编译的本地代码，因此通过 AOT 编译器编译的代码可以被另外的 JVM 实例使用而无需编译。<h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4>用来进行销毁未引用的对象。如果一个对象不再被引用，程序代码就无法访问该对象，垃圾回收器可以移除这些对象并回收内存。</li>
+</ul>
+<h3 id="Java-本地接口（JNI）"><a href="#Java-本地接口（JNI）" class="headerlink" title="Java 本地接口（JNI）"></a>Java 本地接口（JNI）</h3><p>本地接口用来和本地方法库进行交互。可以使 JVM 能够调用 C&#x2F;C++ 或其他编程语言编写的本地应用程序和库。</p>
+<h3 id="本地方法库"><a href="#本地方法库" class="headerlink" title="本地方法库"></a>本地方法库</h3><p>其他编程语言编写的库。可以通过 JNI 加载。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se8/html/index.html">The Java® Virtual Machine Specification</a></li>
 <li><a target="_blank" rel="noopener" href="https://medium.com/platform-engineer/understanding-jvm-architecture-22c0ddf09722">Understanding JVM Architecture</a></li>
 </ul>
@@ -394,6 +406,12 @@ test c:java.lang.Object@4f6b3a3f
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/04/20/jvm-vs-dvm/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JVM 与 DVM 的异同</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
