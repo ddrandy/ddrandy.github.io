@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://ddrandy.github.io/img/index/jvm-abc-cover.jpg">
 <meta property="article:published_time" content="2022-04-07T11:43:17.000Z">
-<meta property="article:modified_time" content="2022-04-21T06:02:37.438Z">
+<meta property="article:modified_time" content="2022-04-21T08:34:02.001Z">
 <meta property="article:author" content="Randy Dong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JVM">
@@ -355,7 +355,7 @@ test c:java.lang.Object@4f6b3a3f
 <h4 id="本地方法栈（线程私有）"><a href="#本地方法栈（线程私有）" class="headerlink" title="本地方法栈（线程私有）"></a>本地方法栈（线程私有）</h4><p>Java 线程和操作系统线程之间存在直接对应关系。在准备好 Java 线程的所有状态后，会创建一个单独的本地栈空间。它用来存储 JNI 调用的本地方法信息（通常由 C&#x2F;C++ 实现）。当本地线程完成创建和初始化，它就会调用 Java 线程中的 <code>run()</code> 方法。当 <code>run()</code> 方法返回时，会处理未捕获的异常，然后本地线程确认是否需要终止 JVM （当前线程是否是最后一个非守护线程）。当线程终止时，本地线程和 Java 线程的所有资源及都将被释放。<br>Java 线程终止后本地线程也会被回收。操作系统负责调度所有线程并进行 CPU 的分派工作。</p>
 <h3 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h3><p>执行引擎用来运行<code>.class</code>（字节码）。它逐行读取字节码，读写各个内存区域中的数据并执行 JVM 指令集。它可以分为下面几个部分：</p>
 <h4 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h4><p>逐行解释字节码，然后执行。存在一个问题是执行解释结果的速度很慢，且当一个方法被多次调用时，每次都需要解释。</p>
-<h4 id="即时（JIT）编译器"><a href="#即时（JIT）编译器" class="headerlink" title="即时（JIT）编译器"></a>即时（JIT）编译器</h4><p>用来提高解释器的执行效率。它将整个字节码编译为本地代码（机器码）。因此当解释器需要处理重复的方法调用时，JIT 会提供该部分直接的机器码，因此不需要重新解释，从而提高效率。执行本地代码比执行一条条解释指令要快很多。<br>它的问题是 JIT 编译时间比解释器解释时间要长。对于只执行一次的代码段，最好的选择可能是解释执行而不是编译执行。本地代码也存储在内存缓存当中，对资源的占用也是一项成本。因此，JIT 编译器会内部检查没个方法调用的频率，并在方法调用超过一定次数时才编译该方法。</p>
+<h4 id="即时（JIT）编译器"><a href="#即时（JIT）编译器" class="headerlink" title="即时（JIT）编译器"></a>即时（JIT）编译器</h4><p>用来提高解释器的执行效率。它将整个字节码编译为本地代码（机器码）。因此当解释器需要处理重复的方法调用时，JIT 会提供该部分直接的机器码，因此不需要重新解释，从而提高效率。执行本地代码比执行一条条解释指令要快很多。<br>它的问题是 JIT 编译时间比解释器解释时间要长。对于只执行一次的代码段，最好的选择可能是解释执行而不是编译执行。本地代码也存储在内存缓存当中，对资源的占用也是一项成本。因此，JIT 编译器会内部检查每个方法调用的频率，并在方法调用超过一定次数时才编译该方法。</p>
 <h5 id="JVM-的编译器优化"><a href="#JVM-的编译器优化" class="headerlink" title="JVM 的编译器优化"></a>JVM 的编译器优化</h5><p>对 JVM 性能优化，下面四个组件可以用来提高性能</p>
 <ul>
 <li>Intermediate Code Genertor 生成中间代码</li>
